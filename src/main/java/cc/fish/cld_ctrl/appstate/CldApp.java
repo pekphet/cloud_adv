@@ -14,4 +14,8 @@ public class CldApp {
     public static void feedback(String content) {
         CldAppImpl.feedback(content);
     }
+
+    public static void download(String url, String fileName) {
+        CldAppImpl.download(url, fileName);
+    }
 }

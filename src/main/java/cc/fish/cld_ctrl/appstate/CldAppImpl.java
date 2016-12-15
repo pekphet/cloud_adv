@@ -5,12 +5,17 @@ import cc.fish.cld_ctrl.appstate.entity.ReqFeedback;
 import cc.fish.cld_ctrl.appstate.interfaces.UpdateCallback;
 import cc.fish.cld_ctrl.common.net.NetManager;
 import cc.fish.cld_ctrl.common.util.AppUtils;
+import cc.fish.cld_ctrl.common.util.DownloadUtils;
 
 /**
  * Created by fish on 16-12-15.
  */
 
 public class CldAppImpl {
+    public static void download(String url, String fileName) {
+        DownloadUtils.startDownService(CldAdImpl.getAppContext(), url, fileName);
+    }
+
     public static void checkUpdate(UpdateCallback callback) {
         NetManager.getInstance().checkUpdate(AppUtils.getMetaAppId(CldAdImpl.getAppContext()),
                 AppUtils.getVersionCode(CldAdImpl.getAppContext()),
