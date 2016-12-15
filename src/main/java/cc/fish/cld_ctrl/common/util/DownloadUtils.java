@@ -1,11 +1,11 @@
-package cc.fish.cld_ctrl.util;
+package cc.fish.cld_ctrl.common.util;
 
 import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 
-import cc.fish.cld_ctrl.service.DownloadService;
+import cc.fish.cld_ctrl.common.service.DownloadService;
 
 /**
  * Created by fish on 16-12-14.

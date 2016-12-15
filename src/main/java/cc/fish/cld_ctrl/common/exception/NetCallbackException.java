@@ -1,4 +1,4 @@
-package cc.fish.cld_ctrl.exception;
+package cc.fish.cld_ctrl.common.exception;
 
 /**
  * Created by fish on 16-12-14.

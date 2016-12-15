@@ -1,9 +1,7 @@
-package cc.fish.cld_ctrl.util;
+package cc.fish.cld_ctrl.common.util;
 
 import android.content.Context;
-import android.content.pm.PackageManager;
 import android.os.Build;
-import android.os.Bundle;
 import android.provider.Settings;
 import android.telephony.TelephonyManager;
 
@@ -45,23 +43,6 @@ public class DeviceUtils {
     public static String getImei(Context context) {
         TelephonyManager tm  = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
         return tm.getDeviceId() == null ? "" : tm.getDeviceId();
-    }
-
-    private static Bundle getMetaData (Context context) {
-        try {
-            return context.getPackageManager().getApplicationInfo(context.getPackageName(), PackageManager.GET_META_DATA).metaData;
-        } catch (PackageManager.NameNotFoundException e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
-
-    public static int getMetaAppId(Context context) {
-        return getMetaData(context).getInt(Const.META_DATA_APP_ID);
-    }
-
-    public static String getMetaChannel(Context context) {
-        return  getMetaData(context).getString(Const.META_DATA_CHANNEL);
     }
 
 }

@@ -1,4 +1,4 @@
-package cc.fish.cld_ctrl.util;
+package cc.fish.cld_ctrl.common.util;
 
 import com.google.gson.Gson;
 

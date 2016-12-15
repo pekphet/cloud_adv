@@ -5,8 +5,8 @@ import android.view.View;
 
 import cc.fish.cld_ctrl.ad.entity.AdDisp;
 import cc.fish.cld_ctrl.ad.entity.enums.AdType;
-import cc.fish.cld_ctrl.ad.net.NetManager;
-import cc.fish.cld_ctrl.util.DispUtils;
+import cc.fish.cld_ctrl.common.net.NetManager;
+import cc.fish.cld_ctrl.common.util.DispUtils;
 
 /**
  * Created by fish on 16-12-13.

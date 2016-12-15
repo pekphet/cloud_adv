@@ -1,4 +1,4 @@
-package cc.fish.cld_ctrl.util;
+package cc.fish.cld_ctrl.common.util;
 
 import android.content.Context;
 import android.graphics.Bitmap;

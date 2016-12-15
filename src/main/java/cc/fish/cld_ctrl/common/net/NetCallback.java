@@ -1,4 +1,4 @@
-package cc.fish.cld_ctrl.ad.net;
+package cc.fish.cld_ctrl.common.net;
 
 /**
  * Created by fish on 16-12-14.

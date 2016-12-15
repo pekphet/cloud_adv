@@ -8,12 +8,13 @@ import cc.fish.cld_ctrl.ad.entity.AdDisp;
 import cc.fish.cld_ctrl.ad.entity.RequestAd;
 import cc.fish.cld_ctrl.ad.entity.ResponseAd;
 import cc.fish.cld_ctrl.ad.entity.enums.AdType;
-import cc.fish.cld_ctrl.ad.net.NetCallback;
-import cc.fish.cld_ctrl.ad.net.NetManager;
+import cc.fish.cld_ctrl.common.net.NetCallback;
+import cc.fish.cld_ctrl.common.net.NetManager;
 import cc.fish.cld_ctrl.ad.view.AdWebView;
-import cc.fish.cld_ctrl.util.DeviceUtils;
-import cc.fish.cld_ctrl.util.DownloadUtils;
-import cc.fish.cld_ctrl.util.EntityUtils;
+import cc.fish.cld_ctrl.common.util.AppUtils;
+import cc.fish.cld_ctrl.common.util.DeviceUtils;
+import cc.fish.cld_ctrl.common.util.DownloadUtils;
+import cc.fish.cld_ctrl.common.util.EntityUtils;
 import cc.fish.fishhttp.util.ZLog;
 
 /**
@@ -24,14 +25,16 @@ public class CldAdImpl {
 
     private static AdDeviceInfo sDeviceInfo;
     private static RequestAd sRequestAd;
+    private static Context sAppContext;
 
     public static void initDeviceInfo(Context applicationContext) {
+        sAppContext = applicationContext;
         sRequestAd = new RequestAd();
         sDeviceInfo = DeviceUtils.getAdDeviceInfo(applicationContext);
         sRequestAd.setDevice_info(sDeviceInfo);
         sRequestAd.setVid(DeviceUtils.getImei(applicationContext));
-        sRequestAd.setApp_id(DeviceUtils.getMetaAppId(applicationContext));
-        sRequestAd.setChannel(DeviceUtils.getMetaChannel(applicationContext));
+        sRequestAd.setApp_id(AppUtils.getMetaAppId(applicationContext));
+        sRequestAd.setChannel(AppUtils.getMetaChannel(applicationContext));
     }
 
     public static void show(AdType type, int ad_slot, View targetView, Context context){
@@ -127,6 +130,10 @@ public class CldAdImpl {
 
     public static RequestAd getRequestAd() {
         return sRequestAd;
+    }
+
+    public static Context getAppContext() {
+        return sAppContext;
     }
 
 }

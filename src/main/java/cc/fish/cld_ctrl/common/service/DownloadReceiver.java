@@ -1,4 +1,4 @@
-package cc.fish.cld_ctrl.service;
+package cc.fish.cld_ctrl.common.service;
 
 import android.app.DownloadManager;
 import android.content.BroadcastReceiver;

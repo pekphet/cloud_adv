@@ -1,4 +1,4 @@
-package cc.fish.cld_ctrl.util;
+package cc.fish.cld_ctrl.common.util;
 
 /**
  * Created by fish on 16-12-14.
