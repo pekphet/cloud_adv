@@ -47,14 +47,14 @@ public class NetManager {
     final static String URL_AD_SHOW         = URL_MAIN + "/cld/ad/show";
     final static String URL_AD_CLICK        = URL_MAIN + "/cld/ad/click";
 
-    final static String URL_APP_UPDATE      = URL_MAIN + "/cld/ad/click";
-    final static String URL_APP_FEEDBACK    = URL_MAIN + "/cld/ad/click";
+    final static String URL_APP_UPDATE      = URL_MAIN + "/cld/app/update";
+    final static String URL_APP_FEEDBACK    = URL_MAIN + "/cld/app/feedback";
 
     final static String PARAM_VID           = "vid";
-    final static String PARAM_AD_ID         = "ad_id";
-    final static String PARAM_APP_ID        = "ad_id";
-    final static String PARAM_VER_CODE      = "ad_id";
-    final static String PARAM_CHANNEL       = "ad_id";
+    final static String PARAM_AD_ID         = "ad_slot";
+    final static String PARAM_APP_ID        = "app_id";
+    final static String PARAM_VER_CODE      = "version_code";
+    final static String PARAM_CHANNEL       = "channel";
 
 
     @NetMethod(RequestHelper.Method.GET)
