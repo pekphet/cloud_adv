@@ -89,7 +89,17 @@ public class NetManager {
     }
 
     public void syncAd(RequestAd requestEntity, NetCallback<ResponseAd> callback) {
-        getAdRequestHelper().UrlParam(requestEntity, true)
+        getAdRequestHelper().UrlParam("ad_slot", requestEntity.getAd_slot() + "", true)
+                .UrlParam("vid",        requestEntity.getVid())
+                .UrlParam("channel",    requestEntity.getChannel())
+                .UrlParam("ad_type",    requestEntity.getAd_type().toString())
+                .UrlParam("app_id",     requestEntity.getApp_id() + "")
+                .UrlParam("brand",      requestEntity.getDevice_info().getBrand())
+                .UrlParam("model",      requestEntity.getDevice_info().getModel())
+                .UrlParam("osv",        requestEntity.getDevice_info().getOsv())
+                .UrlParam("bright",     requestEntity.getDevice_info().getBright() + "")
+                .UrlParam("lat",        requestEntity.getDevice_info().getLat() + "")
+                .UrlParam("lnt",        requestEntity.getDevice_info().getLnt() + "")
                 .Success(result -> {
                     if (result == null || ((AllResponseAd)result).getBody() == null || ((AllResponseAd)result).getBody().getAd_disp() == null) {
                         callback.noDisp();
