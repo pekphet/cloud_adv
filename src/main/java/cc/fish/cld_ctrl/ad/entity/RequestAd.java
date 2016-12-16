@@ -1,12 +1,14 @@
 package cc.fish.cld_ctrl.ad.entity;
 
+import java.io.Serializable;
+
 import cc.fish.cld_ctrl.ad.entity.enums.AdType;
 
 /**
  * Created by fish on 16-12-13.
  */
 
-public class RequestAd {
+public class RequestAd implements Serializable{
     private int app_id;
     private AdType ad_type;
     private int ad_slot;

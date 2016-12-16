@@ -4,7 +4,7 @@ import android.content.Context;
 import android.os.Handler;
 import android.os.Looper;
 
-import cc.fish.cld_ctrl.ad.CldAdImpl;
+import cc.fish.cld_ctrl.ad.entity.AdFeedbackReq;
 import cc.fish.cld_ctrl.ad.entity.RequestAd;
 import cc.fish.cld_ctrl.ad.entity.ResponseAd;
 import cc.fish.cld_ctrl.ad.entity.enums.AllResponseAd;
@@ -44,16 +44,17 @@ public class NetManager {
     }
 /*************************************************/
 
-    final static String URL_MAIN            = "http://192.168.1.201:5555";
-    final static String URL_AD              = URL_MAIN + "/cld/ad";
-    final static String URL_AD_SHOW         = URL_MAIN + "/cld/ad/show";
-    final static String URL_AD_CLICK        = URL_MAIN + "/cld/ad/click";
+    final static boolean NET_TEST           = true;
+    final static String URL_MAIN            = NET_TEST ? "http://t.xiaozi.mobi" : "cloud.xiaozi.mobi";
+    final static String URL_AD              = URL_MAIN + "/ad/req";
+    final static String URL_AD_SHOW         = URL_MAIN + "/ad/effect";
+    final static String URL_AD_CLICK        = URL_MAIN + "/ad/effect";
 
-    final static String URL_APP_UPDATE      = URL_MAIN + "/cld/app/update";
-    final static String URL_APP_FEEDBACK    = URL_MAIN + "/cld/app/feedback";
+    final static String URL_APP_UPDATE      = URL_MAIN + "/app/upd";
+    final static String URL_APP_FEEDBACK    = URL_MAIN + "/app/feedback";
 
     final static String PARAM_VID           = "vid";
-    final static String PARAM_AD_ID         = "ad_slot";
+    final static String PARAM_AD_ID         = "app_ad_id";
     final static String PARAM_APP_ID        = "app_id";
     final static String PARAM_VER_CODE      = "version_code";
     final static String PARAM_CHANNEL       = "channel";
@@ -74,7 +75,7 @@ public class NetManager {
 
     private RequestHelper<Object> getFastRequestHelper() {
         RequestHelper<Object> fastRequest = new RequestHelper<>()
-                .Method(RequestHelper.Method.GET)
+                .Method(RequestHelper.Method.POST)
                 .Result(ResponseAd.class);
         return fastRequest;
     }
@@ -82,13 +83,13 @@ public class NetManager {
     private RequestHelper<AllResponseAd> getAdRequestHelper() {
         RequestHelper<AllResponseAd> adRequest = new RequestHelper<>()
                 .Url(URL_AD)
-                .Method(RequestHelper.Method.POST)
+                .Method(RequestHelper.Method.GET)
                 .Result(AllResponseAd.class);
         return adRequest;
     }
 
     public void syncAd(RequestAd requestEntity, NetCallback<ResponseAd> callback) {
-        getAdRequestHelper().PostJson(requestEntity)
+        getAdRequestHelper().UrlParam(requestEntity, true)
                 .Success(result -> {
                     if (result == null || ((AllResponseAd)result).getBody() == null || ((AllResponseAd)result).getBody().getAd_disp() == null) {
                         callback.noDisp();
@@ -99,21 +100,19 @@ public class NetManager {
                 .Failed(msg -> {
                     ZLog.e("NET->SYNC_AD", (String)msg);
                     callback.failed((String) msg);
-                }).post(mContext, mHandler);
+                }).get(mContext, mHandler);
     }
 
     public void uploadShowAd(int app_ad_id) {
         getFastRequestHelper().Url(URL_AD_SHOW)
-                .UrlParam(PARAM_AD_ID, app_ad_id + "", true)
-                .UrlParam(PARAM_VID, CldAdImpl.getRequestAd().getVid())
-                .get(mContext, mHandler);
+                .PostJson(new AdFeedbackReq("show", app_ad_id))
+                .post(mContext, mHandler);
     }
 
     public void uploadClickAd(int app_ad_id) {
         getFastRequestHelper().Url(URL_AD_CLICK)
-                .UrlParam(PARAM_AD_ID, app_ad_id + "", true)
-                .UrlParam(PARAM_VID, CldAdImpl.getRequestAd().getVid())
-                .get(mContext, mHandler);
+                .PostJson(new AdFeedbackReq("click", app_ad_id))
+                .post(mContext, mHandler);
     }
 
     public void checkUpdate(int app_id, int ver_code, String channel, UpdateCallback callback) {
