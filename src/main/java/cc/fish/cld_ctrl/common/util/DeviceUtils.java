@@ -17,7 +17,7 @@ public class DeviceUtils {
         AdDeviceInfo info = new AdDeviceInfo();
         info.setOsv(Build.VERSION.SDK_INT + "");
         info.setBrand(Build.MANUFACTURER);
-        info.setModel(Build.MODEL);
+        info.setModel(Build.MODEL.replace(" ", "_"));
         info.setLat(gps[0]);
         info.setLnt(gps[1]);
         info.setBright(getSystemBrightness(context));

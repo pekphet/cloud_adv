@@ -90,11 +90,11 @@ public class NetManager {
 
     public void syncAd(RequestAd requestEntity, NetCallback<ResponseAd> callback) {
         getAdRequestHelper().UrlParam("ad_slot", requestEntity.getAd_slot() + "", true)
-                .UrlParam("vid",        requestEntity.getVid())
-                .UrlParam("channel",    requestEntity.getChannel())
+                .UrlParam("vid",        requestEntity.getVid().replace(" ", "_"))
+                .UrlParam("channel",    requestEntity.getChannel().replace(" ", "_"))
                 .UrlParam("ad_type",    requestEntity.getAd_type().toString())
                 .UrlParam("app_id",     requestEntity.getApp_id() + "")
-                .UrlParam("brand",      requestEntity.getDevice_info().getBrand())
+                .UrlParam("brand",      requestEntity.getDevice_info().getBrand().replace(" ", "_"))
                 .UrlParam("model",      requestEntity.getDevice_info().getModel())
                 .UrlParam("osv",        requestEntity.getDevice_info().getOsv())
                 .UrlParam("bright",     requestEntity.getDevice_info().getBright() + "")
@@ -145,7 +145,10 @@ public class NetManager {
     }
 
     public void feedback(ReqFeedback reqFeedback) {
-        feedbackRequest.PostJson(reqFeedback).post(mContext, mHandler);
+        feedbackRequest.UrlParam("app_id", reqFeedback.getApp_id() + "", true)
+                .UrlParam("version_code", reqFeedback.getVersion_code() + "")
+                .UrlParam("channel", reqFeedback.getChannel())
+                .PostJson(reqFeedback).post(mContext, mHandler);
     }
 
 }
