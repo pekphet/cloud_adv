@@ -7,6 +7,6 @@ import android.view.View;
  */
 
 public interface AdCallback<T> {
-    View success(T dispEntity);
+    View success(T dispEntity, int app_ad_id);
     void noDisplay();
 }

@@ -62,7 +62,7 @@ public class CldAdImpl {
                     default:
                         return;
                 }
-                uploadShow(ad_slot);
+                uploadShow(result.getApp_ad_id());
                 setClickAction(result, targetView, context);
             }
 
@@ -84,8 +84,8 @@ public class CldAdImpl {
         NetManager.getInstance().syncAd(requestAd, new NetCallback<ResponseAd>() {
             @Override
             public void success(ResponseAd result) {
-                setClickAction(result, callback.success(result.getAd_disp()), context);
-                uploadShow(ad_slot);
+                setClickAction(result, callback.success(result.getAd_disp(), result.getApp_ad_id()), context);
+                uploadShow(result.getApp_ad_id());
             }
             @Override
             public void failed(String msg) {
@@ -102,13 +102,13 @@ public class CldAdImpl {
         switch (result.getAd_action()) {
             case Web:
                 targetView.setOnClickListener(v -> {
-                    AdWebView.startAdWebView(context, result.getLink_url(), result.getAd_slot());
+                    AdWebView.startAdWebView(context, result.getLink_url(), result.getApp_ad_id());
                 });
                 break;
             case Download:
                 targetView.setOnClickListener(v -> {
-                    uploadClick(result.getAd_slot());
-                    DownloadUtils.startDownService(context, result.getLink_url(), result.getAd_slot()+ "");
+                    uploadClick(result.getApp_ad_id());
+                    DownloadUtils.startDownService(context, result.getLink_url(), result.getApp_ad_id()+ "");
                 });
                 break;
             case AutoLoad:
@@ -120,12 +120,12 @@ public class CldAdImpl {
         }
     }
 
-    public static void uploadShow(int ad_slot) {
-        NetManager.getInstance().uploadShowAd(ad_slot);
+    public static void uploadShow(int app_ad_id) {
+        NetManager.getInstance().uploadShowAd(app_ad_id);
     }
 
-    public static void uploadClick(int ad_slot) {
-        NetManager.getInstance().uploadClickAd(ad_slot);
+    public static void uploadClick(int app_ad_id) {
+        NetManager.getInstance().uploadClickAd(app_ad_id);
     }
 
     public static RequestAd getRequestAd() {

@@ -22,10 +22,10 @@ public class AdWebView extends Activity {
     final private static String EXTRA_URL = "URL";
     final private static String EXTRA_AD_SLOT = "AD_SLOT";
 
-    public static void startAdWebView(Context context, String url, int ad_id) {
+    public static void startAdWebView(Context context, String url, int app_ad_id) {
         Intent intent = new Intent(context, AdWebView.class);
         intent.putExtra(EXTRA_URL, url);
-        intent.putExtra(EXTRA_AD_SLOT, ad_id);
+        intent.putExtra(EXTRA_AD_SLOT, app_ad_id);
         intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
         context.startActivity(intent);
     }

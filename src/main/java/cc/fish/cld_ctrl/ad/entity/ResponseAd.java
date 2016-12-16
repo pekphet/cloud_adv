@@ -13,6 +13,15 @@ public class ResponseAd {
     private AdAction ad_action;
     private String link_url;
     private AdDisp ad_disp;
+    private int app_ad_id;
+
+    public int getApp_ad_id() {
+        return app_ad_id;
+    }
+
+    public void setApp_ad_id(int app_ad_id) {
+        this.app_ad_id = app_ad_id;
+    }
 
     public AdType getAd_type() {
         return ad_type;
